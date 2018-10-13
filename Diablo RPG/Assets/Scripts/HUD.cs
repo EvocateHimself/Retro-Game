@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour {
 
+    /*
     // Variables
     [Header("Inventory")]
     public Inventory Inventory;
@@ -14,8 +15,8 @@ public class HUD : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        Inventory.ItemAdded += InventoryScript_ItemAdded;
-        Inventory.ItemRemoved += InventoryScript_ItemRemoved;
+        //Inventory.ItemAdded += InventoryScript_ItemAdded;
+        //Inventory.ItemRemoved += InventoryScript_ItemRemoved;
     }
 
 
@@ -33,8 +34,8 @@ public class HUD : MonoBehaviour {
             // Found empty slot
             if (!image.enabled) {
                 image.enabled = true;
-                image.sprite = e.Item.Image;
-                quality.sprite = e.Item.Quality;
+                //image.sprite = e.data.image;
+                //quality.sprite = e.Item.quality;
 
 
                 //TODO: Store a reference to the item
@@ -67,4 +68,5 @@ public class HUD : MonoBehaviour {
             }
         }
     }
+    */
 }

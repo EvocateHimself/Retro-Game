@@ -10,13 +10,13 @@ public class PlayerController : MonoBehaviour {
     // Variables
     NavMeshAgent agent;
     Transform target;
+    Animation anim;
 
     [Header("Inventory")]
-    public Inventory inventory;
+    public InventoryManager inventory;
 
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button inventoryButton;
-    private IInventoryItem currentItem = null;
 
     [Header("Map")]
     [SerializeField] private GameObject mapPanel;
@@ -28,57 +28,22 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private LayerMask movementMask;
     [SerializeField] private Interactable focus;
 
+    [Header("Skills")]
+    [SerializeField] private Button primaryButton;
 
     // Use this for initialization
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animation>();
         wayPoint.SetActive(false);
         inventoryPanel.SetActive(false);
         mapPanel.SetActive(false);
-
-        inventory.ItemUsed += Inventory_ItemUsed;
-        inventory.ItemRemoved += Inventory_ItemRemoved;
-
     }
-
-    private void Inventory_ItemRemoved(object sender, InventoryEventArgs e) {
-        IInventoryItem item = e.Item;
-
-        GameObject goItem = (item as MonoBehaviour).gameObject;
-        goItem.SetActive(true);
-        goItem.transform.Find("NameTagCanvas").gameObject.SetActive(false);
-        goItem.transform.parent = null;
-    }
-
-    private void SetItemActive(IInventoryItem item, bool active) {
-        GameObject currentItem = (item as MonoBehaviour).gameObject;
-        currentItem.SetActive(active);
-        currentItem.transform.parent = active ? rightHand.transform : null;
-    }
-
-    private void Inventory_ItemUsed(object sender, InventoryEventArgs e) {
-        // If the player carries an item, un-use it (remove from player's hand)
-        if(currentItem != null) {
-
-            SetItemActive(currentItem, false);
-        }
-
-        IInventoryItem item = e.Item;
-
-        GameObject goItem = (item as MonoBehaviour).gameObject;
-        goItem.transform.Find("NameTagCanvas").gameObject.SetActive(false);
-
-        // Use item (put it in player's hand)
-        SetItemActive(item, true);
-        currentItem = e.Item;
-    }
-
 
     // Update is called once per frame
     private void Update() {
         EventSystem.current.SetSelectedGameObject(null); // Disable button hover properly * requires using UnityEngine.EventSystems;
         if (!EventSystem.current.IsPointerOverGameObject()) { // Prevents raycast from passing through UI * requires using UnityEngine.EventSystems;
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -107,8 +72,19 @@ public class PlayerController : MonoBehaviour {
                         wayPoint.transform.position = hit.point;
                         agent.destination = transform.position;
                         transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+
+                        if (Input.GetMouseButtonDown(0)) {
+                            Debug.Log("attack");
+                            anim.Play("PrimarySkill");
+                        }
                     }
                 }
+            }
+
+            // Secondary skill
+            if (Input.GetMouseButtonDown(0)) {
+                Debug.Log("attack");
+                anim.Play("PrimarySkill");
             }
 
             // Keypress I (inventory)
@@ -148,7 +124,6 @@ public class PlayerController : MonoBehaviour {
         }
         inventoryButton.colors = colorVar;
     }
-
 
     // Check if the map is opened/closed and display it
     public void CheckMap() {
@@ -212,15 +187,4 @@ public class PlayerController : MonoBehaviour {
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
-
-    
-    // Add item to inventory on collision
-    private void OnCollisionEnter(Collision collision) {
-        IInventoryItem item = collision.collider.GetComponent<IInventoryItem>();
-        if (item != null) {
-            inventory.AddItem(item);
-            Debug.Log("added item " + collision.gameObject.name);
-        }
-    }
-    
 }

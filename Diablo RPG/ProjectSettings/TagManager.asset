@@ -7,6 +7,8 @@ TagManager:
   - Inventory
   - InventoryItems
   - Interactable
+  - Nametag
+  - Equipped
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - PostProcessing
   - Ground
   - Player
-  - 
+  - Equipment
   - 
   - 
   - 

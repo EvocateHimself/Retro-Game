@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Interactable : MonoBehaviour {
 
@@ -10,10 +11,8 @@ public class Interactable : MonoBehaviour {
     bool isFocus = false;
     bool hasInteracted = false;
 
-    public Transform interactionTransform;
-
     [SerializeField] private float radius = 3f;
-    
+
     public float Radius {
         get {
             return radius;
@@ -23,12 +22,13 @@ public class Interactable : MonoBehaviour {
         }
     }
 
+    public Transform interactionTransform;
+
 
     // Interact method that is meant to be overwritten by other classes
     public virtual void Interact() {
         Debug.Log("Interacting with " + transform.name);
     }
-
 
     // Update is called once per frame
     private void Update() {
@@ -58,6 +58,9 @@ public class Interactable : MonoBehaviour {
 
 
     private void OnDrawGizmosSelected() {
+        if (interactionTransform == null)
+            interactionTransform = transform;
+
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(interactionTransform.position, radius);
     }
