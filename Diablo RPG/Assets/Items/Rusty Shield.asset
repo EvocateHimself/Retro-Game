@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Rusty Shield
   m_EditorClassIdentifier: 
   name: Rusty Shield
-  description: A shield that hasn't been used in a while.
+  description: An old shield that hasn't been used in a while.
   icon: {fileID: 21300000, guid: b193ae6cc411eaa44bc7d12ed7578c51, type: 3}
   quality: {fileID: 21300000, guid: 43fd3506b9627e448b819e7c10b0194c, type: 3}
   isDefaultItem: 0
@@ -22,8 +22,8 @@ MonoBehaviour:
   equipmentSlot: 9
   equipPosition: {x: -0.4300019, y: 0.2399997, z: 1.200002}
   equipRotation: {x: 15, y: 0, z: 0}
-  strengthModifier: 2
-  defenseModifier: 5
-  vitalityModifier: 1
+  strengthModifier: 1
+  defenseModifier: 4
+  vitalityModifier: 2
   staminaModifier: 1
-  price: 37
+  price: 145

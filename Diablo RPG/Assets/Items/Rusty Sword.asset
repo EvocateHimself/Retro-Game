@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Rusty Sword
   m_EditorClassIdentifier: 
   name: Rusty Sword
-  description: A sword that hasn't been used in a while.
+  description: An old sword that hasn't been used in a while.
   icon: {fileID: 21300000, guid: 2b1876e77bc061748aeb42e3b19e91b9, type: 3}
   quality: {fileID: 21300000, guid: 43fd3506b9627e448b819e7c10b0194c, type: 3}
   isDefaultItem: 0
@@ -21,9 +21,9 @@ MonoBehaviour:
   dropRotation: {x: 0, y: 0, z: 0}
   equipmentSlot: 4
   equipPosition: {x: -0.160004, y: 3.329999, z: 2.500001}
-  equipRotation: {x: 15, y: 0, z: 90}
-  strengthModifier: 3
-  defenseModifier: 2
+  equipRotation: {x: 15, y: 0, z: 90.00001}
+  strengthModifier: 2
+  defenseModifier: 1
   vitalityModifier: 0
   staminaModifier: 0
-  price: 15
+  price: 65

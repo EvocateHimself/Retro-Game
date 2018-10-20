@@ -27,8 +27,9 @@ public class Interactable : MonoBehaviour {
 
     // Interact method that is meant to be overwritten by other classes
     public virtual void Interact() {
-        Debug.Log("Interacting with " + transform.name);
+        Debug.Log("Interacting with: " + transform.name);
     }
+
 
     // Update is called once per frame
     private void Update() {
@@ -43,6 +44,7 @@ public class Interactable : MonoBehaviour {
     }
 
 
+    // On focussing an interactable
     public void OnFocused(Transform playerTransform) {
         isFocus = true;
         player = playerTransform;
@@ -50,6 +52,7 @@ public class Interactable : MonoBehaviour {
     }
 
 
+    // On defocussing an interactable
     public void OnDefocused() {
         isFocus = false;
         player = null;
@@ -57,6 +60,7 @@ public class Interactable : MonoBehaviour {
     }
 
 
+    // Draw gizmos around interactable
     private void OnDrawGizmosSelected() {
         if (interactionTransform == null)
             interactionTransform = transform;

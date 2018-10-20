@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65644342775593196}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 65099977254867464}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   interactionTransform: {fileID: 4328957970477588}
-  item: {fileID: 11400000, guid: 104193b898c06174da0dd5414b7e436b, type: 2}
+  item: {fileID: 11400000, guid: 412227aa37845b14e9e09a205a8c2bb1, type: 2}
   nameTag: {fileID: 114949590739788820}
 --- !u!114 &114027089609472882
 MonoBehaviour:

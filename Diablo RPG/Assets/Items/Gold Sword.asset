@@ -21,9 +21,9 @@ MonoBehaviour:
   dropRotation: {x: 0, y: 0, z: 0}
   equipmentSlot: 4
   equipPosition: {x: -0.160004, y: 3.329999, z: 2.500001}
-  equipRotation: {x: 15, y: 0, z: 90}
-  strengthModifier: 14
+  equipRotation: {x: 15, y: 0, z: 90.00001}
+  strengthModifier: 12
   defenseModifier: 7
   vitalityModifier: 0
   staminaModifier: 0
-  price: 270
+  price: 430

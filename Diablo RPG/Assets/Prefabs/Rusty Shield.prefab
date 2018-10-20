@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   interactionTransform: {fileID: 4728081529386940}
-  item: {fileID: 11400000, guid: 6f39116342cbba54298519765547cce3, type: 2}
+  item: {fileID: 11400000, guid: ddb7724cebfa930499141ba922da5d96, type: 2}
   nameTag: {fileID: 114245096489877190}
 --- !u!222 &222000274836420316
 CanvasRenderer:
