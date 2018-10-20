@@ -9,10 +9,9 @@ public class PlayerStats : CharacterStats {
     [SerializeField]
     private Text strengthText, defenseText, vitalityText, staminaText;
 
+    [Header("Mana")]
     public float maxMana = 100;
-
     public float currentMana = 0;
-
     [SerializeField]
     private Image manaBar;
 
@@ -21,7 +20,9 @@ public class PlayerStats : CharacterStats {
     private void Start () {
         currentMana = maxMana;
         EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
-	}
+        InvokeRepeating("RegenerateMana", 0f, 2f); // regenerate mana over 2 seconds
+        InvokeRepeating("RegenerateHealth", 0f, 2f); // regenerate health over 2 seconds
+    }
 
 
     // Call the OnEquipmentChanged callback method
@@ -68,5 +69,28 @@ public class PlayerStats : CharacterStats {
         base.Die();
         // Kill the player
         //PlayerManager.instance.KillPlayer();
+    }
+
+
+    // Automatically regenerate 1 mana every X second
+    private void RegenerateMana() {
+        if (currentMana < maxMana) {
+            currentMana += 1f;
+            //currentMana = Mathf.Lerp(currentMana, 1f, Time.deltaTime);
+
+            float calcMana = currentMana / maxMana;
+            SetMana(calcMana);
+        }
+    }
+
+
+    // Automatically regenerate 1 mana every X second
+    private void RegenerateHealth() {
+        if (currentHealth < maxHealth) {
+            currentHealth += 1f;
+
+            float calcHealth = currentHealth / maxHealth;
+            SetHealth(calcHealth);
+        }
     }
 }

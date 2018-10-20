@@ -23,7 +23,7 @@ MonoBehaviour:
   equipPosition: {x: -0.4300019, y: 0.2399997, z: 1.200002}
   equipRotation: {x: 15, y: 0, z: 0}
   strengthModifier: 1
-  defenseModifier: 4
+  defenseModifier: 2
   vitalityModifier: 2
   staminaModifier: 1
   price: 145

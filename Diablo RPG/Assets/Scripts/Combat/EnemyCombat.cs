@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterStats))]
-public class CharacterCombat : MonoBehaviour {
+public class EnemyCombat : MonoBehaviour {
 
     CharacterStats myStats;
 
-    public float attackSpeed = 1f;
-
     public float attackCooldown = 0f;
-
+    public float attackSpeed = 1f;
     public float attackDelay = .6f;
-
     public event System.Action onAttack;
-
+    
 
     // Use this for initialization
     private void Start() {
@@ -40,7 +37,6 @@ public class CharacterCombat : MonoBehaviour {
             attackCooldown = 1f / attackSpeed;
         }
     }
-
 
     // Do damage based on delay
     private IEnumerator DoDamage(CharacterStats stats, float delay) {

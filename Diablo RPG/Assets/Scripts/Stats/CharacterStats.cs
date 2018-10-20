@@ -5,31 +5,26 @@ using UnityEngine.UI;
 
 public class CharacterStats : MonoBehaviour {
 
-    [SerializeField]
-    private float maxHealth = 100;
+    [Header("Health")]
 
-    [SerializeField]
-    private float currentHealth = 0;
+    public float maxHealth = 100;
+    public float currentHealth = 0;
 
     [SerializeField]
     private Image healthBar;
 
     // Playerstats values
-    public Stat strength, defense, vitality, stamina;
+    [Header("Stats")]
+    public Stat strength;
+    public Stat defense;
+    public Stat vitality;
+    public Stat stamina;
 
 
     // Initialize object variables
     private void Awake() {
         currentHealth = maxHealth;
 
-    }
-
-
-    // Update is called once per frame
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.T)) {
-            TakeDamage(10);
-        }
     }
 
 
@@ -52,7 +47,7 @@ public class CharacterStats : MonoBehaviour {
 
 
     // Set the healthbar's value to currenthealth
-    private void SetHealth(float myHealth) {
+    public void SetHealth(float myHealth) {
         healthBar.fillAmount = myHealth;
     }
 

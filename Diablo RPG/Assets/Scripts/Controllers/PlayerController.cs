@@ -94,8 +94,6 @@ public class PlayerController : MonoBehaviour {
                         //enemy.Interact();
                     }
                 }
-                
-                //combat.SecondarySkill(myStats);
             }
 
             // Keypress I (inventory)

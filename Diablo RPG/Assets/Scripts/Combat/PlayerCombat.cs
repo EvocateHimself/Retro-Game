@@ -4,43 +4,46 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterStats))]
-public class PlayerCombat : CharacterCombat {
+public class PlayerCombat : MonoBehaviour {
 
     Animation anim;
     CharacterStats myStats;
     PlayerStats myPlayerStats;
 
-    // Showable/hidable UI panels
+    public float attackCooldown = 0f;
+
     [SerializeField]
-    private GameObject inventoryPanel, mapPanel;
+    private Text warningText;
 
-    // Clickable UI buttons
+    [Header("Inventory")]
     [SerializeField]
-    private Button primaryButton, inventoryButton, mapButton;
+    private Button inventoryButton;
+    [SerializeField]
+    private GameObject inventoryPanel;
 
+    [Header("Map")]
+    [SerializeField]
+    private Button mapButton;
+    [SerializeField]
+    private GameObject mapPanel;
 
+    [Header("Primary Skill")]
     [SerializeField]
     private float primaryAttackSpeed = 1f;
-
     [SerializeField]
     private float primaryAttackDelay = .6f;
-
     [SerializeField]
     private float primaryAttackMana = .6f;
 
+    [Header("Secondary Skill")]
     [SerializeField]
     private float secondaryAttackSpeed = 1f;
-
     [SerializeField]
     private float secondaryAttackDelay = .6f;
-
     [SerializeField]
     private float secondaryAttackMana = .6f;
-
-    /*
     [SerializeField]
-    private float attackCooldown = 0f;
-    */
+    private float secondaryAttackDamageMultiplier = 3f;
 
     public event System.Action onAttack;
 
@@ -52,6 +55,13 @@ public class PlayerCombat : CharacterCombat {
         myPlayerStats = GetComponent<PlayerStats>();
         inventoryPanel.SetActive(false);
         mapPanel.SetActive(false);
+        warningText.gameObject.SetActive(false);
+    }
+
+
+    // Update is called once per frame
+    private void Update() {
+        attackCooldown -= Time.deltaTime;
     }
 
 
@@ -113,12 +123,20 @@ public class PlayerCombat : CharacterCombat {
     }
 
 
+    // Show warning text
+    private IEnumerator ShowWarning(float delay) {
+        warningText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(delay);
+        warningText.gameObject.SetActive(false);
+    }
+
+
     // Activate primary skill
     private IEnumerator DoPrimaryDamage(CharacterStats stats, float delay) {
         yield return new WaitForSeconds(delay);
-        anim.Play("PrimarySkill");
+
         stats.TakeDamage(myStats.strength.BaseValue());
-        //stats.TakeDamage(10);
+        anim.Play("PrimarySkill");
 
         // If currentMana is less than maxMana, regenerate mana
         if (myPlayerStats.currentMana < myPlayerStats.maxMana) {
@@ -129,37 +147,23 @@ public class PlayerCombat : CharacterCombat {
         myPlayerStats.SetMana(calcMana);
     }
 
-    // Activate primary skill
+
+    // Activate secondary skill
     private IEnumerator DoSecondaryDamage(CharacterStats stats, float delay) {
         yield return new WaitForSeconds(delay);
-        anim.Play("SecondarySkill");
-        stats.TakeDamage(myStats.strength.BaseValue() * 1.5f);
-
-        myPlayerStats.currentMana -= secondaryAttackMana;
+        
+        if (myPlayerStats.currentMana >= secondaryAttackMana) {
+            myPlayerStats.currentMana -= secondaryAttackMana;
+            stats.TakeDamage(myStats.strength.BaseValue() * secondaryAttackDamageMultiplier);
+            anim.Play("SecondarySkill");
+        } 
+        
+        else {
+            warningText.text = "Not enough Mana!";
+            StartCoroutine(ShowWarning(2));
+        }
 
         float calcMana = myPlayerStats.currentMana / myPlayerStats.maxMana;
         myPlayerStats.SetMana(calcMana);
-
-        if (myPlayerStats.currentMana <= 0) {
-            // disable skill
-        }
     }
-
-    /*
-    // Decrease health upon taking damage
-    public void TakeDamage(float damage) {
-        damage -= defense.BaseValue();
-        damage = Mathf.Clamp(damage, 0, float.MaxValue);
-
-        currentHealth -= damage;
-
-        float calcHealth = currentHealth / maxHealth;
-        SetHealth(calcHealth);
-
-        Debug.Log(transform.name + " takes " + damage + " damage.");
-
-        if (currentHealth <= 0) {
-            Die();
-        }
-    }*/
 }
