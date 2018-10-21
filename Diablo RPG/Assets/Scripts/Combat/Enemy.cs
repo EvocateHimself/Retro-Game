@@ -23,15 +23,13 @@ public class Enemy : Interactable {
         PlayerController playerController = playerManager.player.GetComponent<PlayerController>();
 
         if (playerCombat != null) {
-            if (playerController.primaryAttack) {
+            if (playerController.PrimaryAttack) {
                 playerCombat.PrimarySkill(myStats);
             }
 
-            else if (playerController.secondaryAttack) {
+            else if (playerController.SecondaryAttack) {
                 playerCombat.SecondarySkill(myStats);
             }
-            
-            //playerCombat.Attack(myStats);
         }
     }
 }

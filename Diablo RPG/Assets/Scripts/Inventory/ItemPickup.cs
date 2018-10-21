@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ItemPickup : Interactable {
 
-    public Item item;
+    public Item item; // Cannot be a property, must be visible in inspector and accessible
 
     [SerializeField]
     private Text nameTag;

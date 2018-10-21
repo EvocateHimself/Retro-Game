@@ -54,6 +54,7 @@ public class CharacterStats : MonoBehaviour {
     }
 
     //Stat values
+    //Cannot be property, must be public
     [Header("Stats")]
     public Stat strength;
     public Stat defense;

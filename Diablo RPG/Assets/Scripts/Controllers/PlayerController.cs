@@ -22,8 +22,28 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Interactable focus;
 
-    public bool primaryAttack = false;
-    public bool secondaryAttack = false;
+    private bool primaryAttack = false;
+    private bool secondaryAttack = false;
+
+    public bool PrimaryAttack {
+        get {
+            return primaryAttack;
+        }
+
+        set {
+            primaryAttack = value;
+        }
+    }
+
+    public bool SecondaryAttack {
+        get {
+            return secondaryAttack;
+        }
+
+        set {
+            secondaryAttack = value;
+        }
+    }
 
 
     // Use this for initialization
@@ -57,8 +77,8 @@ public class PlayerController : MonoBehaviour {
 
                     if (interactable != null) {
                         SetFocus(interactable);
-                        primaryAttack = true;
-                        secondaryAttack = false;
+                        PrimaryAttack = true;
+                        SecondaryAttack = false;
                     }
                 }
             }
@@ -89,8 +109,8 @@ public class PlayerController : MonoBehaviour {
 
                     if (interactable != null) {
                         SetFocus(interactable);
-                        primaryAttack = false;
-                        secondaryAttack = true;
+                        PrimaryAttack = false;
+                        SecondaryAttack = true;
                         //enemy.Interact();
                     }
                 }

@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Equipment")]
 public class Equipment : Item {
 
+    // EVERYTHING PUBLIC > SCRIPTABLE OBJECT
     [Header("Equipment settings")]
     public EquipmentSlot equipmentSlot;
 
@@ -17,6 +18,7 @@ public class Equipment : Item {
     public int vitalityModifier = 0;
     public int staminaModifier = 0;
     public int price = 0;
+
 
     public override void Use() {
         base.Use();

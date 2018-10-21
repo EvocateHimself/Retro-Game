@@ -7,11 +7,47 @@ public class EnemyCombat : MonoBehaviour {
 
     CharacterStats myStats;
 
-    public float attackCooldown = 0f;
-    public float attackSpeed = 1f;
-    public float attackDelay = .6f;
+    [SerializeField]
+    private float attackCoolDown = 0f;
+
+    [SerializeField]
+    private float attackSpeed = 1f;
+
+    [SerializeField]
+    private float attackDelay = .6f;
+
+    public float AttackCooldown {
+        get {
+            return attackCoolDown;
+        }
+
+        set {
+            attackCoolDown = value;
+        }
+    }
+
+    public float AttackSpeed {
+        get {
+            return attackSpeed;
+        }
+
+        set {
+            attackSpeed = value;
+        }
+    }
+
+    public float AttackDelay {
+        get {
+            return attackDelay;
+        }
+
+        set {
+            attackDelay = value;
+        }
+    }
+
     public event System.Action onAttack;
-    
+
 
     // Use this for initialization
     private void Start() {
@@ -21,27 +57,27 @@ public class EnemyCombat : MonoBehaviour {
 
     // Update is called once per frame
     private void Update() {
-        attackCooldown -= Time.deltaTime;
+        AttackCooldown -= Time.deltaTime;
     }
 
 
     // Attack the enemy
     public void Attack(CharacterStats targetStats) {
-        if (attackCooldown <= 0f) {
+        if (AttackCooldown <= 0f) {
             StartCoroutine(DoDamage(targetStats, attackDelay));
 
             if (onAttack != null) {
                 onAttack();
             }
 
-            attackCooldown = 1f / attackSpeed;
+            AttackCooldown = 1f / attackSpeed;
         }
     }
+
 
     // Do damage based on delay
     private IEnumerator DoDamage(CharacterStats stats, float delay) {
         yield return new WaitForSeconds(delay);
         stats.TakeDamage(myStats.strength.BaseValue());
-        //stats.TakeDamage(10);
     }
 }

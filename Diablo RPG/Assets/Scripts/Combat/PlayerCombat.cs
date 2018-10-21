@@ -10,7 +10,8 @@ public class PlayerCombat : MonoBehaviour {
     CharacterStats myStats;
     PlayerStats myPlayerStats;
 
-    public float attackCooldown = 0f;
+    [SerializeField]
+    private float attackCooldown = 0f;
 
     [SerializeField]
     private Text warningText;
@@ -51,6 +52,16 @@ public class PlayerCombat : MonoBehaviour {
     [SerializeField]
     private AudioSource impactSound;
 
+    public float AttackCooldown {
+        get {
+            return attackCooldown;
+        }
+
+        set {
+            attackCooldown = value;
+        }
+    }
+
     public event System.Action onAttack;
 
 
@@ -67,7 +78,7 @@ public class PlayerCombat : MonoBehaviour {
 
     // Update is called once per frame
     private void Update() {
-        attackCooldown -= Time.deltaTime;
+        AttackCooldown -= Time.deltaTime;
     }
 
 
@@ -82,6 +93,7 @@ public class PlayerCombat : MonoBehaviour {
             inventoryPanel.SetActive(false);
             colorVar.normalColor = Color.white;
         }
+
         inventoryButton.colors = colorVar;
     }
 
@@ -97,34 +109,35 @@ public class PlayerCombat : MonoBehaviour {
             mapPanel.SetActive(false);
             colorVar.normalColor = Color.white;
         }
+
         mapButton.colors = colorVar;
     }
 
 
     // Primary skill (slash)
     public void PrimarySkill(CharacterStats targetStats) {
-        if (attackCooldown <= 0f) {
+        if (AttackCooldown <= 0f) {
             StartCoroutine(DoPrimaryDamage(targetStats, primaryAttackDelay));
 
             if (onAttack != null) {
                 onAttack();
             }
 
-            attackCooldown = 1f / primaryAttackSpeed;
+            AttackCooldown = 1f / primaryAttackSpeed;
         }
     }
 
 
     // Secondary skill (fire strike)
     public void SecondarySkill(CharacterStats targetStats) {
-        if (attackCooldown <= 0f) {
+        if (AttackCooldown <= 0f) {
             StartCoroutine(DoSecondaryDamage(targetStats, secondaryAttackDelay));
 
             if (onAttack != null) {
                 onAttack();
             }
 
-            attackCooldown = 1f / secondaryAttackSpeed;
+            AttackCooldown = 1f / secondaryAttackSpeed;
         }
     }
 
