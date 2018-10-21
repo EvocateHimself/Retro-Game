@@ -15,6 +15,8 @@ public class Enemy : Interactable {
         myStats = GetComponent<CharacterStats>();
     }
 
+
+    // Interact with the object
     public override void Interact() {
         base.Interact();
         PlayerCombat playerCombat = playerManager.player.GetComponent<PlayerCombat>();

@@ -11,13 +11,17 @@ public class PlayerStats : CharacterStats {
 
     private float currentManaValue;
 
+    [Header("Gold")]
+    [SerializeField]
+    private int gold = 0;
+    public Text goldText;
+
     [Header("Mana")]
     public float maxMana = 100;
     public float currentMana = 0;
 
     [SerializeField]
     private Image manaBar;
-
     [SerializeField]
     private Text manaText;
 
@@ -46,6 +50,16 @@ public class PlayerStats : CharacterStats {
 
         set {
             maxMana = value;
+        }
+    }
+
+    public int Gold {
+        get {
+            return gold;
+        }
+
+        set {
+            gold = value;
         }
     }
 
@@ -108,10 +122,10 @@ public class PlayerStats : CharacterStats {
     }
 
 
+    // Do something if the player dies
     public override void Die() {
         base.Die();
-        // Kill the player
-        //PlayerManager.instance.KillPlayer();
+        PlayerManager.instance.KillPlayer();
     }
 
 
@@ -140,7 +154,7 @@ public class PlayerStats : CharacterStats {
     }
 
 
-    // Fade in/fade out blood for low health
+    // Fade in/fade out blood UI for low health
     private void FadeBlood(bool fadeIn) {
         // Fade in
         if (fadeIn) {

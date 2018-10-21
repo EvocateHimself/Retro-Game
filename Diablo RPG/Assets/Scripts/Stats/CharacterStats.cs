@@ -53,7 +53,7 @@ public class CharacterStats : MonoBehaviour {
         }
     }
 
-    // Playerstats values
+    //Stat values
     [Header("Stats")]
     public Stat strength;
     public Stat defense;
@@ -90,9 +90,9 @@ public class CharacterStats : MonoBehaviour {
 
     // Do something if the player is dead
     public virtual void Die() {
-        // Die in some way
         Debug.Log(transform.name + " died.");
     }
+
 
     // Handles the healthbar my moving it and changing color
     public void HandleHealthbar() {
