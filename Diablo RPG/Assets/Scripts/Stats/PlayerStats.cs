@@ -21,6 +21,14 @@ public class PlayerStats : CharacterStats {
     [SerializeField]
     private Text manaText;
 
+    [Header("Health Warning")]
+    [SerializeField]
+    private float showWarningAt = 30f;
+    [SerializeField]
+    private float warningSpeed = 2f;
+    [SerializeField]
+    private Image lowHealth;
+
     public float CurrentMana {
         get {
             return currentMana;
@@ -55,6 +63,14 @@ public class PlayerStats : CharacterStats {
     public override void Update() {
         HandleManabar();
         HandleHealthbar();
+
+        if (CurrentHealth <= showWarningAt) {
+            FadeBlood(true);
+        }
+
+        else {
+            FadeBlood(false);
+        }
     }
 
 
@@ -121,5 +137,19 @@ public class PlayerStats : CharacterStats {
 
         // Sets the fillAmount of the mana to simulate reduction of mana 
         manaBar.fillAmount = Mathf.Lerp(manaBar.fillAmount, currentManaValue, Time.deltaTime * LerpSpeed);
+    }
+
+
+    // Fade in/fade out blood for low health
+    private void FadeBlood(bool fadeIn) {
+        // Fade in
+        if (fadeIn) {
+            lowHealth.CrossFadeAlpha(1, warningSpeed, false);
+        }
+
+        // Fade out
+        else {
+            lowHealth.CrossFadeAlpha(0, warningSpeed, false);
+        }
     }
 }
