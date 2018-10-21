@@ -33,7 +33,7 @@ public class PlayerCombat : MonoBehaviour {
     [SerializeField]
     private float primaryAttackDelay = .6f;
     [SerializeField]
-    private float primaryAttackMana = .6f;
+    private float manaGain = 5f;
 
     [Header("Secondary Skill")]
     [SerializeField]
@@ -139,12 +139,9 @@ public class PlayerCombat : MonoBehaviour {
         anim.Play("PrimarySkill");
 
         // If currentMana is less than maxMana, regenerate mana
-        if (myPlayerStats.currentMana < myPlayerStats.maxMana) {
-            myPlayerStats.currentMana += primaryAttackMana;
+        if (myPlayerStats.CurrentMana < myPlayerStats.MaxMana) {
+            myPlayerStats.CurrentMana += manaGain;
         }
-        
-        float calcMana = myPlayerStats.currentMana / myPlayerStats.maxMana;
-        myPlayerStats.SetMana(calcMana);
     }
 
 
@@ -152,8 +149,8 @@ public class PlayerCombat : MonoBehaviour {
     private IEnumerator DoSecondaryDamage(CharacterStats stats, float delay) {
         yield return new WaitForSeconds(delay);
         
-        if (myPlayerStats.currentMana >= secondaryAttackMana) {
-            myPlayerStats.currentMana -= secondaryAttackMana;
+        if (myPlayerStats.CurrentMana >= secondaryAttackMana) {
+            myPlayerStats.CurrentMana -= secondaryAttackMana;
             stats.TakeDamage(myStats.strength.BaseValue() * secondaryAttackDamageMultiplier);
             anim.Play("SecondarySkill");
         } 
@@ -162,8 +159,5 @@ public class PlayerCombat : MonoBehaviour {
             warningText.text = "Not enough Mana!";
             StartCoroutine(ShowWarning(2));
         }
-
-        float calcMana = myPlayerStats.currentMana / myPlayerStats.maxMana;
-        myPlayerStats.SetMana(calcMana);
     }
 }

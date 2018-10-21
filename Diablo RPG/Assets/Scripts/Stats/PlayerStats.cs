@@ -9,19 +9,52 @@ public class PlayerStats : CharacterStats {
     [SerializeField]
     private Text strengthText, defenseText, vitalityText, staminaText;
 
+    private float currentManaValue;
+
     [Header("Mana")]
     public float maxMana = 100;
     public float currentMana = 0;
+
     [SerializeField]
     private Image manaBar;
+
+    [SerializeField]
+    private Text manaText;
+
+    public float CurrentMana {
+        get {
+            return currentMana;
+        }
+
+        set {
+            currentMana = Mathf.Clamp(value, 0, MaxHealth);
+        }
+    }
+
+    public float MaxMana {
+        get {
+            return maxMana;
+        }
+
+        set {
+            maxMana = value;
+        }
+    }
 
 
     // Use this for initialization
     private void Start () {
-        currentMana = maxMana;
+        CurrentMana = MaxMana;
         EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
         InvokeRepeating("RegenerateMana", 0f, 2f); // regenerate mana over 2 seconds
         InvokeRepeating("RegenerateHealth", 0f, 2f); // regenerate health over 2 seconds
+    }
+
+
+    // Update is called once per frame
+    public override void Update() {
+        HandleManabar();
+        HandleHealthbar();
     }
 
 
@@ -59,12 +92,6 @@ public class PlayerStats : CharacterStats {
     }
 
 
-    // Set the healthbar's value to currenthealth
-    public void SetMana(float myMana) {
-        manaBar.fillAmount = myMana;
-    }
-
-
     public override void Die() {
         base.Die();
         // Kill the player
@@ -74,23 +101,25 @@ public class PlayerStats : CharacterStats {
 
     // Automatically regenerate 1 mana every X second
     private void RegenerateMana() {
-        if (currentMana < maxMana) {
-            currentMana += 1f;
-            //currentMana = Mathf.Lerp(currentMana, 1f, Time.deltaTime);
-
-            float calcMana = currentMana / maxMana;
-            SetMana(calcMana);
-        }
+        CurrentMana += 1f;
     }
 
 
     // Automatically regenerate 1 mana every X second
     private void RegenerateHealth() {
-        if (currentHealth < maxHealth) {
-            currentHealth += 1f;
+        CurrentHealth += 1f;
+    }
 
-            float calcHealth = currentHealth / maxHealth;
-            SetHealth(calcHealth);
-        }
+    
+    // Handles the manabar my moving it and changing color
+    private void HandleManabar() {
+        // Writes the current mana in the text field
+        manaText.text = CurrentMana + "/" + MaxMana;
+
+        // Maps the min and max position to the range between 0 and max mana
+        currentManaValue = Map(CurrentMana, 0, MaxMana, 0, 1);
+
+        // Sets the fillAmount of the mana to simulate reduction of mana 
+        manaBar.fillAmount = Mathf.Lerp(manaBar.fillAmount, currentManaValue, Time.deltaTime * LerpSpeed);
     }
 }
