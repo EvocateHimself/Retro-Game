@@ -18,7 +18,6 @@ public class Equipment : Item {
     public int staminaModifier = 0;
     public int price = 0;
 
-
     public override void Use() {
         base.Use();
         // Equip item

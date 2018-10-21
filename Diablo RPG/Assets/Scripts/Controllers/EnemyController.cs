@@ -61,6 +61,7 @@ public class EnemyController : MonoBehaviour {
             isIdle = false;
             isWalking = true;
             isAttacking = false;
+            isDead = false;
 
             // If within attacking distance
             if (playerDistance <= agent.stoppingDistance + 2f) {
@@ -71,6 +72,7 @@ public class EnemyController : MonoBehaviour {
                     isIdle = false;
                     isWalking = false;
                     isAttacking = true;
+                    isDead = false;
 
                     // If enemy is dead
                     if (enemyStats.ZeroHealth) {
@@ -91,6 +93,7 @@ public class EnemyController : MonoBehaviour {
             isIdle = false;
             isWalking = true;
             isAttacking = false;
+            isDead = false;
 
             // Distance to the moveSpot
             float patrolDistance = Vector3.Distance(moveSpots[randomSpot].position, transform.position);
@@ -109,6 +112,7 @@ public class EnemyController : MonoBehaviour {
                     isIdle = true;
                     isWalking = false;
                     isAttacking = false;
+                    isDead = false;
                 }
             }
         }

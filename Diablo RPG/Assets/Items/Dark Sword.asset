@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d597ca945a3a7fe4298be895ad00eb86, type: 3}
+  m_Name: Dark Sword
+  m_EditorClassIdentifier: 
+  name: Dark Sword
+  description: The darkest sword in existence.
+  icon: {fileID: 21300000, guid: c5b1ea853e4876448baff26c3ce4a700, type: 3}
+  quality: {fileID: 21300000, guid: f50a0db60010451459d4deb411524cd9, type: 3}
+  isDefaultItem: 0
+  equipmentPrefab: {fileID: 1304742513488906, guid: 4051131f111846b45a2250e07ca22f8e,
+    type: 2}
+  dropRotation: {x: 0, y: 0, z: 0}
+  equipmentSlot: 4
+  equipPosition: {x: -0.160004, y: 3.329999, z: 2.500001}
+  equipRotation: {x: 15, y: 0, z: 90.00001}
+  strengthModifier: 16
+  defenseModifier: 8
+  vitalityModifier: 4
+  staminaModifier: 0
+  price: 0

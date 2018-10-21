@@ -22,7 +22,7 @@ MonoBehaviour:
   equipmentSlot: 4
   equipPosition: {x: -0.160004, y: 3.329999, z: 2.500001}
   equipRotation: {x: 15, y: 0, z: 90.00001}
-  strengthModifier: 2
+  strengthModifier: 3
   defenseModifier: 0
   vitalityModifier: 0
   staminaModifier: 0

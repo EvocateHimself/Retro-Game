@@ -13,7 +13,13 @@ public class EnemyStats : CharacterStats {
     [SerializeField]
     private GameObject healthOrb;
     [SerializeField]
-    private GameObject rustyShield;
+    private GameObject shield;
+    [SerializeField]
+    private GameObject sword;
+    [SerializeField]
+    private GameObject secondShield;
+    [SerializeField]
+    private GameObject secondSword;
 
     private bool zeroHealth = false;
 
@@ -39,12 +45,15 @@ public class EnemyStats : CharacterStats {
     private IEnumerator DeadAnim(float delay) {
         ZeroHealth = true;
         yield return new WaitForSeconds(delay);
-        int randomNumber = Random.Range(0, 3);
+        int randomNumber = Random.Range(0, 6);
 
         switch (randomNumber) {
             case 0: Instantiate(gold, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))); break;
             case 1: Instantiate(healthOrb, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(new Vector3(0, 0, 0))); break;
-            case 2: Instantiate(rustyShield, transform.position, Quaternion.Euler(new Vector3(0, 0, -90))); break;
+            case 2: Instantiate(shield, transform.position, Quaternion.Euler(new Vector3(0, 0, -90))); break;
+            case 3: Instantiate(sword, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))); break;
+            case 4: Instantiate(secondShield, transform.position, Quaternion.Euler(new Vector3(0, 0, -90))); break;
+            case 5: Instantiate(secondSword, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))); break;
         }
 
         Destroy(gameObject);

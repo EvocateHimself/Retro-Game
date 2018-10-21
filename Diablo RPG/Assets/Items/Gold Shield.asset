@@ -22,8 +22,8 @@ MonoBehaviour:
   equipmentSlot: 9
   equipPosition: {x: -0.4300019, y: 0.2399997, z: 1.200002}
   equipRotation: {x: 15, y: 0, z: 0}
-  strengthModifier: 5
-  defenseModifier: 22
-  vitalityModifier: 6
-  staminaModifier: 3
+  strengthModifier: 3
+  defenseModifier: 12
+  vitalityModifier: 4
+  staminaModifier: 2
   price: 680

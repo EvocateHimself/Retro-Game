@@ -17,8 +17,10 @@ public class PlayerStats : CharacterStats {
     public Text goldText;
 
     [Header("Mana")]
-    public float maxMana = 100;
-    public float currentMana = 0;
+    [SerializeField]
+    private float maxMana = 100;
+    [SerializeField]
+    private float currentMana = 0;
 
     [SerializeField]
     private Image manaBar;

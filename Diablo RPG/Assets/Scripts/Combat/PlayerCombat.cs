@@ -34,6 +34,8 @@ public class PlayerCombat : MonoBehaviour {
     private float primaryAttackDelay = .6f;
     [SerializeField]
     private float manaGain = 5f;
+    [SerializeField]
+    private AudioSource primaryHit;
 
     [Header("Secondary Skill")]
     [SerializeField]
@@ -44,6 +46,10 @@ public class PlayerCombat : MonoBehaviour {
     private float secondaryAttackMana = .6f;
     [SerializeField]
     private float secondaryAttackDamageMultiplier = 3f;
+    [SerializeField]
+    private AudioSource secondaryHit;
+    [SerializeField]
+    private AudioSource impactSound;
 
     public event System.Action onAttack;
 
@@ -137,6 +143,8 @@ public class PlayerCombat : MonoBehaviour {
 
         stats.TakeDamage(myStats.strength.BaseValue());
         anim.Play("PrimarySkill");
+        primaryHit.Play();
+        impactSound.PlayDelayed(0.1f);
 
         // If currentMana is less than maxMana, regenerate mana
         if (myPlayerStats.CurrentMana < myPlayerStats.MaxMana) {
@@ -153,6 +161,8 @@ public class PlayerCombat : MonoBehaviour {
             myPlayerStats.CurrentMana -= secondaryAttackMana;
             stats.TakeDamage(myStats.strength.BaseValue() * secondaryAttackDamageMultiplier);
             anim.Play("SecondarySkill");
+            secondaryHit.Play();
+            impactSound.PlayDelayed(0.15f);
         } 
         
         else {
